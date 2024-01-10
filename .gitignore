@@ -1,0 +1,6 @@
+data/
+.Rproj.user
+.DS_Store
+.Rhistory
+plots/
+processed-data/
