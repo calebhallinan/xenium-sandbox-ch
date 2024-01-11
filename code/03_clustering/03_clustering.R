@@ -1,3 +1,4 @@
+# CH: run GLM-PCA, cluster using SNN and louvain
 suppressPackageStartupMessages({
     library(Voyager)
     #library(SFEData)

@@ -1,3 +1,4 @@
+# CH: read in data, combine to one single SFE object
 suppressPackageStartupMessages({
     #library(Voyager)
     library(SpatialFeatureExperiment)

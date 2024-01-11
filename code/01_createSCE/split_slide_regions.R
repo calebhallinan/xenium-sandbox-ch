@@ -1,3 +1,4 @@
+# CH: split slides and save
 suppressPackageStartupMessages({
     library(Voyager)
     library(SFEData)

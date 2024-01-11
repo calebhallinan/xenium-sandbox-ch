@@ -1,3 +1,4 @@
+# CH: read in preprocesses data, filter cells based on criteria in slides, save filtered data
 suppressPackageStartupMessages({
     library(Voyager)
     #library(SFEData)
@@ -22,6 +23,10 @@ suppressPackageStartupMessages({
     library(schex)
 })
 
+
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# BiocManager::install("schex")
 
 ################################################
 # Filter out low quality cells for each region #

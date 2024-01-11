@@ -1,3 +1,4 @@
+# CH: reading in data, making SPE objects of the full dataset, saving them in folder
 suppressPackageStartupMessages({
     library(SingleCellExperiment)
     library(SpatialExperiment)
@@ -37,3 +38,4 @@ for (id in subject_positions){
     fname <- paste0(id, "-Visium-SPE.RDS")
     saveRDS(spe, here("processed-data", "cindy", "visium", fname))
 }
+
