@@ -1,3 +1,4 @@
+# CH: can successfully run this with minor tweaks. makes pdf of lowly expressed genes
 suppressPackageStartupMessages({
     library(Voyager)
     library(SFEData)
@@ -25,7 +26,8 @@ suppressPackageStartupMessages({
 ######################################################
 
 ##### Slide 5434 #####
-data_dir <- "output-XETG00089__0005434__Region_1__20230831__172339"
+# data_dir <- "output-XETG00089__0005434__Region_1__20230831__172339"
+data_dir <- "slide-5434" # CH: added for my directory
 
 # Read in the three regions
 br6471_p <- readRDS(here("data", data_dir, "Br6471_Post_SFE.RDS"))

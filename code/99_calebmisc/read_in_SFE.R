@@ -17,5 +17,12 @@ dimGeometry(data, "spotPoly", MARGIN = 2)
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install("scry")
+BiocManager::install("Banksy")
 
+remotes::install_github("prabhakarlab/Banksy")
+
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(version = "3.18")
+
+devtools::install(here("Banksy-bioc"), repos=NULL, type='source')

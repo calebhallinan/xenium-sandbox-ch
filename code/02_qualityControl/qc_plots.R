@@ -1,3 +1,4 @@
+# CH: can successfully run this code with minor edits. make QC plots for data
 suppressPackageStartupMessages({
     library(Voyager)
     library(patchwork)
@@ -30,9 +31,9 @@ suppressPackageStartupMessages({
 data_dir <- "slide-5434"
 
 # Read in the three regions
-br6471_p <- readRDS(here("processed-data", "cindy", data_dir, "Br6471_Post_SFE.RDS"))
-br6522_p <- readRDS(here("processed-data", "cindy", data_dir, "Br6522_Post_SFE.RDS"))
-br8667_m <- readRDS(here("processed-data", "cindy", data_dir, "Br8667_Mid_SFE.RDS"))
+br6471_p <- readRDS(here("data", data_dir, "Br6471_Post_SFE.RDS")) # CH: changed all of these to different directory
+br6522_p <- readRDS(here("data", data_dir, "Br6522_Post_SFE.RDS"))
+br8667_m <- readRDS(here("data", data_dir, "Br8667_Mid_SFE.RDS"))
 
 sfe.all <- readRDS(here("processed-data", "cindy", data_dir, "xenium-0005434-SFE.RDS"))
 
@@ -139,7 +140,7 @@ cols_use <- names(colData(br8667_m))[str_detect(names(colData(sfe)), "_percent$"
 cols_use <- cols_use[!grepl("subsets_anti_percent", cols_use)]
 
 
-pdf(here("plots", "02_qualityControl", "slide5434_QCPlots.pdf"), height=5, width=12)
+pdf(here("plots", "cindy", "02_qualityControl", "slide5434_QCPlots.pdf"), height=5, width=12)
 print(h1)
 print(h2)
 print(p1+p2+p3)

@@ -1,3 +1,4 @@
+# CH: I can run this successfully - output is ST map of genes below neg controls.
 suppressPackageStartupMessages({
     library(Voyager)
     library(SpatialFeatureExperiment)
@@ -10,6 +11,7 @@ suppressPackageStartupMessages({
     library(dplyr)
     library(here)
     library(escheR)
+    library(here)
 })
 
 #-------------------------------------------------------------------------------
@@ -18,12 +20,12 @@ suppressPackageStartupMessages({
 #-------------------------------------------------------------------------------
 
 # read in the data
-args <- commandArgs(trailingOnly=TRUE)
-sfe <- readRDS(args[[1]])
+# args <- commandArgs(trailingOnly=TRUE)
+# sfe <- readRDS(args[[1]])
 
 
-#sfe <- readRDS(here("processed-data/", "cindy", "slide-5434", "Br6522_Post_SFE.RDS"))
-genelist <- readxl::read_excel(here("processed-data","XeniumHumanBrainPanelGeneList.xlsx"))
+sfe <- readRDS(here("data", "slide-5434", "Br6522_Post_SFE.RDS")) # CH: adding this to run
+genelist <- readxl::read_excel(here("data","XeniumHumanBrainPanelGeneList.xlsx")) # CH: made edit to my location
 
 # the negative control probes are denoted in the colData by is_neg
 # for each cell, compute the number of negative control probe counts

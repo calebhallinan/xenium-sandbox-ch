@@ -1,3 +1,4 @@
+# CH: successfully runs clustering using BANKSY
 suppressPackageStartupMessages({
     library(Voyager)
     library(SpatialFeatureExperiment)
@@ -19,7 +20,8 @@ suppressPackageStartupMessages({
 # Trying out Banksy for spatial domain detection:
 # tutorial: https://github.com/prabhakarlab/Banksy/tree/bioc
 #------------------------------------------------------------#
-args <- commandArgs(trailingOnly = TRUE)
+# args <- commandArgs(trailingOnly = TRUE)
+args <-  c("data/slide-5434/Br8667_Mid_SFE_filt.RDS", 0.9, 0.5) # CH: adding to run local
 lambda <- as.numeric(args[[2]])
 #k <- args[[3]]
 res <- as.numeric(args[[3]])
