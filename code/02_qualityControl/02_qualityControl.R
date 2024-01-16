@@ -35,11 +35,12 @@ source(here("code", "01_createSCE", "xenium_helpers.R"))
 
 ##### Slide 5434 #####
 data_dir <- "slide-5434"
+sfe <- readRDS("processed-data/cindy/slide-5434/xenium-0005434-SFE.RDS") # CH: editing for my directory
 
 # Read in the three regions
-br6471_p <- readRDS(here("processed-data", "cindy", data_dir, "Br6471_Post_SFE.RDS"))
-br6522_p <- readRDS(here("processed-data", "cindy", data_dir, "Br6522_Post_SFE.RDS"))
-br8667_m <- readRDS(here("processed-data", "cindy", data_dir, "Br8667_Mid_SFE.RDS"))
+br6471_p <- readRDS(here("data", data_dir, "Br6471_Post_SFE.RDS"))
+br6522_p <- readRDS(here("data", data_dir, "Br6522_Post_SFE.RDS")) 
+br8667_m <- readRDS(here("data", data_dir, "Br8667_Mid_SFE.RDS"))
 
 
 filterCells <- function(sfe){
@@ -61,6 +62,8 @@ filterCells <- function(sfe){
     sfe <- sfe[which(rowData(sfe)$Type=="Gene Expression"), ]
     return(sfe)
 }
+
+# Filter cells
 br6471_p_filt <- filterCells(br6471_p)
 br6522_p_filt <- filterCells(br6522_p)
 br8667_m_filt <- filterCells(br8667_m)

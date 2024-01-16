@@ -14,3 +14,8 @@ dimGeometry(data, "spotPoly", MARGIN = 2)
 # escheR and voyager has functions to plot data from object
 
 
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("scry")
+

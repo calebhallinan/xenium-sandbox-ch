@@ -169,6 +169,20 @@ getRegionInds <- function(region, data_dir, sfe){
     
 }
 
+# CH: added function for specific cell_id.csv files Cindy sent for sample -5434
+getRegionInds_5434 <- function(region, data_dir, sfe){
+    # Read in the cell ids of a particular region
+    region_ids_fname <- paste0(region, "_cell_ids.csv")
+    region_ids <- readr::read_csv(here("data", data_dir, region_ids_fname))
+    
+    # Get the sfe indices for the cells in the region
+    region_inds <- which(sfe$cell_id %in% region_ids$x)
+    
+    return(region_inds)
+    
+}
+
+
 SFEtoSPE <- function(sfe){
     # First convert to an SCE
     sce <- SingleCellExperiment(assays=list(counts=counts(sfe)))

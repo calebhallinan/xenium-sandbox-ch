@@ -30,21 +30,22 @@ source(here("code/01_createSCE/xenium_helpers.R"))
 
 #### Slide Number 5548 ####
 data_dir <- "slide-5548/"
-sfe <- readXenium(data_dir)
+# sfe <- readXenium(data_dir)
+sfe <- readRDS("processed-data/cindy/slide-5548/xenium-0005548-SFE.RDS") # CH: editing for my directory
 
 # Assign one of three region names to each cell, first create a dummy coldata variable.
 sfe$region_id <- "Sample"
 
 # Br2743_Mid
-br2743_inds <- getRegionInds("Br2743_Mid", data_dir, sfe)
+br2743_inds <- getRegionInds("Br2743_Mid_5548", data_dir, sfe) # CH: had to put _5548
 sfe$region_id[br2743_inds] <- "Br2743_Mid_5548"
 
 # Br6471_Post
-br6471_inds <- getRegionInds("Br6471_Post",data_dir, sfe)
+br6471_inds <- getRegionInds("Br6471_Post_5548",data_dir, sfe) # CH: had to put _5548
 sfe$region_id[br6471_inds] <- "Br6471_Post_5548"
 
 # Br8667_Mid
-br8667_inds <- getRegionInds("Br8667_Mid", data_dir, sfe)
+br8667_inds <- getRegionInds("Br8667_Mid_5548", data_dir, sfe) # CH: had to put _5548
 sfe$region_id[br8667_inds] <- "Br8667_Mid_5548"
 
 # Check for any cells that weren't assigned to a region
@@ -52,7 +53,7 @@ sum(sfe$region_id == "Sample") # 6 are not assigned. in the morphology image, it
 
 # Create the individual SFE objects for each region and save it as RDS
 br2743 <- sfe[,br2743_inds]
-saveRDS(br2743, here("data", data_dir, "Br2743_Mid_SFE.RDS"))
+saveRDS(br2743, here("data", data_dir, "Br2743_Mid_SFE.RDS")) 
 
 br6471 <- sfe[,br6471_inds]
 saveRDS(br6471, here("data", data_dir, "Br6471_Post_SFE.RDS"))
@@ -65,22 +66,23 @@ saveRDS(sfe, here("data", data_dir, "xenium-0005548-SFE.RDS"))
 
 
 #### Slide Number 5434 ####
-data_dir <- "slide-5434"
-sfe <- readXenium(data_dir)
+data_dir <- "slide-5434/"
+sfe <- readRDS("processed-data/cindy/slide-5434/xenium-0005434-SFE.RDS") # CH: editing for my directory
+# sfe <- readXenium(data_dir)
 
 # Assign one of three region names to each cell, first create a dummy coldata variable.
 sfe$region_id <- "Sample"
 
 # Br6522_Post
-br6522_inds <- getRegionInds("Br6522_Post", data_dir, sfe)
+br6522_inds <- getRegionInds("Br6522_Post_5434", data_dir, sfe) # CH: had to put _5434
 sfe$region_id[br6522_inds] <- "Br6522_Post_5434"
 
 # Br6471_Post
-br6471_inds <- getRegionInds("Br6471_Post", data_dir, sfe)
+br6471_inds <- getRegionInds("Br6471_Post_5434", data_dir, sfe) # CH: had to put _5434
 sfe$region_id[br6471_inds] <- "Br6471_Post_5434"
 
 # Br8667_Mid
-br8667_inds <- getRegionInds("Br8667_Mid", data_dir, sfe)
+br8667_inds <- getRegionInds("Br8667_Mid_5434", data_dir, sfe) # CH: had to put _5434
 sfe$region_id[br8667_inds] <- "Br8667_Mid_5434"
 
 # Check for any cells that weren't assigned to a region
