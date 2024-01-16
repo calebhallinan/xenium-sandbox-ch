@@ -21,7 +21,7 @@ suppressPackageStartupMessages({
 # tutorial: https://github.com/prabhakarlab/Banksy/tree/bioc
 #------------------------------------------------------------#
 # args <- commandArgs(trailingOnly = TRUE)
-args <-  c("data/slide-5434/Br8667_Mid_SFE_filt.RDS", 0.9, 0.5) # CH: adding to run local
+args <-  c("data/slide-5434/Br6471_Post_SFE_filt.RDS", 0.9, 0.5) # CH: adding to run local
 lambda <- as.numeric(args[[2]])
 #k <- args[[3]]
 res <- as.numeric(args[[3]])

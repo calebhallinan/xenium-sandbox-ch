@@ -1,3 +1,4 @@
+# CH: successfully ran on 5548 tissues - to run 5434 would need to rerun split_slide_regions to get basic .RDS files
 suppressPackageStartupMessages({
     library(SpatialFeatureExperiment)
     library(SingleCellExperiment)
@@ -10,13 +11,16 @@ suppressPackageStartupMessages({
 # Run the Banksy multisample workflow:
 # https://github.com/prabhakarlab/Banksy/blob/bioc/vignettes/multi-sample.Rmd
 
-source(here("code","cindy", "01_createSCE","xenium_helpers.R"))
+source(here("code","01_createSCE","xenium_helpers.R"))
 
 # sfe.paths1 <- system("ls processed-data/cindy/slide-5434", intern=TRUE)
 # sfe.paths1 <- sfe.paths1[grepl("*filt.RDS", sfe.paths1)]
 # sfe.paths1 <- paste0("processed-data/cindy/slide-5434/", sfe.paths1)
 
-args <- commandArgs(trailingOnly = TRUE)
+# args <- commandArgs(trailingOnly = TRUE)
+# args <-  c("data/slide-5434/Br8667_Mid_SFE_filt.RDS", "data/slide-5434/Br6522_Post_SFE_filt.RDS", "data/slide-5434/Br6471_Post_SFE_filt.RDS",0.9, 6, 0.4, 5434) # CH: adding to run local
+args <-  c("data/slide-5548/Br2743_Mid_SFE_filt.RDS", "data/slide-5548/Br6471_Post_SFE_filt.RDS", "data/slide-5548/Br8667_Mid_SFE_filt.RDS",0.9, 6, 0.4, 5434) # CH: adding to run local
+
 print(args)
 # get the SFE paths
 sfe.paths <- args[1:3]
@@ -31,8 +35,8 @@ slide <- args[[7]]
 
 # read in the individual sfes and 
 aname <- "normcounts"
-spe_list <- lapply(sfe.paths, function(x){
-    x <- readRDS(x)
+spe_list <- lapply(sfe.paths, function(x){ 
+    x <- readRDS(here(x)) # CH: add here()
     x <- SFEtoSPE(x) # note: this function only keeps counts assay
     assay(x, aname) <- normalizeCounts(x, log = FALSE)
     return(x) # return SPE for easier downstream manipulations
@@ -46,6 +50,8 @@ spe_list <- lapply(spe_list, computeBanksy,
                    assay_name = aname,
                    compute_agf = compute_agf, 
                    k_geom = k_geom)
+
+
 # cbind the sfes together
 spe_joint <- do.call(cbind, spe_list) 
 
@@ -61,7 +67,6 @@ spe_joint <- runBanksyUMAP(spe_joint, use_agf = use_agf,
                           seed = 0922)
 
 # Cluster
-
 spe_joint <- clusterBanksy(spe_joint, use_agf = use_agf, 
                            lambda = lambda, resolution = res, seed = 0923)
 
