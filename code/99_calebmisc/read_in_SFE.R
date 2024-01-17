@@ -31,12 +31,4 @@ data = readRDS(here::here("data/slide-5434/Br6471_Post_SFE.RDS"))
 colData(data)
 
 # plot
-make_escheR(data, spot_size=20) |> add_fill(var = "nGenes_normed") 
-
-
-library(STexampleData)
-spe <- Visium_humanDLPFC()
-make_escheR(spe, spot_size=0.1) |> add_fill(var = "in_tissue") 
-make_escheR(spe, spot_size=5) |> add_fill(var = "in_tissue") 
-make_escheR(spe, spot_size=10) |> add_fill(var = "in_tissue") 
-# All these look the same
+make_escheR(data) |> add_fill(var = "total_counts", point_size=1) 
