@@ -6,4 +6,4 @@
 
 module load conda_R/4.3.x
 
-Rscript code/cindy/01_createSCE/readVisium.R
+Rscript readVisium.R

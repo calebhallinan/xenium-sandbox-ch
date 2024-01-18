@@ -14,10 +14,13 @@ suppressPackageStartupMessages({
 # Read in the Visum data from /dcs04/lieber/lcolladotor/spatialDLPFC_LIBD4035/spatialDLPFC
 # and subset the SPE object to the samples that we have Xenium replicates for
 #-------------------------------------------------------------------------------
+
+# read in data
 ehub <- ExperimentHub::ExperimentHub()
 raw_sce <- fetch_data(type = "spatialDLPFC_Visium", eh = ehub)
 sce <- raw_sce
 
+# set sub positions
 subject_positions <- c("Br6471_Post", "Br6522_Post", "Br8667_Mid", "Br2743_Mid")
 sce$position <- substr(sce$position, 1,3)
 sce$position[grepl("pos", sce$position)] <- "Post"
