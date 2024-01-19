@@ -16,7 +16,7 @@ data$total
 
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-BiocManager::install("BiocStyle")
+BiocManager::install("Voyager")
 
 remotes::install_github("prabhakarlab/Banksy")
 

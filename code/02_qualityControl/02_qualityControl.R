@@ -35,7 +35,7 @@ source(here("code", "01_createSCE", "xenium_helpers.R"))
 
 ##### Slide 5434 #####
 data_dir <- "slide-5434"
-sfe <- readRDS("processed-data/cindy/slide-5434/xenium-0005434-SFE.RDS") # CH: editing for my directory
+sfe <- readRDS("/users/challina/xenium-sandbox-ch/processed-data/cindy/slide-5434/xenium-0005434-SFE.RDS") # CH: editing for my directory
 
 # Read in the three regions
 br6471_p <- readRDS(here("data", data_dir, "Br6471_Post_SFE.RDS"))

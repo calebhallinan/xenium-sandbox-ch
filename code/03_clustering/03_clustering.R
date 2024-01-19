@@ -27,7 +27,7 @@ suppressPackageStartupMessages({
 args <- commandArgs(trailingOnly=TRUE)
 
 # CH: adding this for args
-args <- c("data/slide-5434/Br8667_Mid_SFE_filt.RDS", 25)
+args <- c("/users/challina/xenium-sandbox-ch/data/slide-5434/Br8667_Mid_SFE_filt.RDS", 25)
 
 # Read in the data
 print(args[[1]])
@@ -61,7 +61,7 @@ pdfname <- paste0(pdfname, ".pdf")
 print(pdfname)
 
 # plot the PCA plots and the clusters on the tissue
-pdf(here("plots", "cindy", "03_clustering", pdfname))
+pdf(here("plots",  "03_clustering", pdfname))
 plotReducedDim(sfe, ncomponents=4, colour_by="total_counts", dimred="GLM-PCA")
 dev.off()
 ElbowPlot(sfe, reduction="GLM-PCA", ndims=50)
