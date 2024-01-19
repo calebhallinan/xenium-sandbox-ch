@@ -21,7 +21,7 @@ suppressPackageStartupMessages({
 # tutorial: https://github.com/prabhakarlab/Banksy/tree/bioc
 #------------------------------------------------------------#
 # args <- commandArgs(trailingOnly = TRUE)
-args <-  c("data/slide-5434/Br6471_Post_SFE_filt.RDS", 0.9, 0.5) # CH: adding to run local
+args <-  c("/users/challina/xenium-sandbox-ch/data/slide-5434/Br6471_Post_SFE_filt.RDS", 0.9, 0.5) # CH: adding to run local
 lambda <- as.numeric(args[[2]])
 #k <- args[[3]]
 res <- as.numeric(args[[3]])
@@ -84,7 +84,7 @@ if (class(sfe)=="SpatialExperiment"){ # save to different location if it's visiu
     fname <- paste(sfe$subject_position[[1]], "visium", "Banksy", "lambda", 
                    lambda, "res", res, sep="-")
     pdfname <- paste0(fname, ".pdf")
-    pdf(here("plots", "cindy", "05_segmentRegions", "banksy", "visium", pdfname))
+    pdf(here("plots",  "05_segmentRegions", "banksy", "visium", pdfname))
     print(p1)
     dev.off()
 } else{
@@ -96,7 +96,7 @@ if (class(sfe)=="SpatialExperiment"){ # save to different location if it's visiu
     fname <- paste(sfe$region_id[[1]], "Banksy", "lambda", 
                    lambda, "res", res, sep="-")
     pdfname <- paste0(fname, ".pdf")
-    pdf(here("plots", "cindy", "05_segmentRegions", "banksy", pdfname))
+    pdf(here("plots", "05_segmentRegions", "banksy", pdfname))
     print(p1)
     dev.off()
 }
