@@ -21,7 +21,8 @@ suppressPackageStartupMessages({
 # tutorial: https://github.com/prabhakarlab/Banksy/tree/bioc
 #------------------------------------------------------------#
 # args <- commandArgs(trailingOnly = TRUE)
-args <-  c("/users/challina/xenium-sandbox-ch/data/slide-5434/Br6471_Post_SFE_filt.RDS", 0.9, 0.5) # CH: adding to run local
+# args <-  c("data/slide-5434/Br6522_Post_SFE_filt.RDS", 0.9, 0.5) # CH: adding to run local
+args <-  c("/users/challina/xenium-sandbox-ch/data/slide-5434/Br6522_Post_SFE_filt.RDS", 0.9, 0.5) # CH: adding to run local
 lambda <- as.numeric(args[[2]])
 #k <- args[[3]]
 res <- as.numeric(args[[3]])
@@ -30,8 +31,10 @@ print(lambda)
 print(res)
 
 # read in the data
-sfe <- readRDS(args[[1]])
-# delete this line after the first run
+# sfe <- readRDS(args[[1]])
+sfe <- readRDS("/users/challina/xenium-sandbox-ch/data/slide-5434/Br6471_Post_SFE_filt.RDS")
+# sfe <- readRDS("data/slide-5434/Br6471_Post_SFE_filt.RDS")
+cold# delete this line after the first run
 #colData(sfe) <- colData(sfe)[,!grepl("^clust", colnames(colData(sfe)))]
 
 
@@ -84,7 +87,7 @@ if (class(sfe)=="SpatialExperiment"){ # save to different location if it's visiu
     fname <- paste(sfe$subject_position[[1]], "visium", "Banksy", "lambda", 
                    lambda, "res", res, sep="-")
     pdfname <- paste0(fname, ".pdf")
-    pdf(here("plots",  "05_segmentRegions", "banksy", "visium", pdfname))
+    pdf(here("plots", "05_segmentRegions", "banksy", "visium", pdfname))
     print(p1)
     dev.off()
 } else{
@@ -100,7 +103,6 @@ if (class(sfe)=="SpatialExperiment"){ # save to different location if it's visiu
     print(p1)
     dev.off()
 }
-
 
 
 
