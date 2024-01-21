@@ -31,10 +31,10 @@ print(lambda)
 print(res)
 
 # read in the data
-# sfe <- readRDS(args[[1]])
-sfe <- readRDS("/users/challina/xenium-sandbox-ch/data/slide-5434/Br6471_Post_SFE_filt.RDS")
+sfe <- readRDS(args[[1]])
+# sfe <- readRDS("/users/challina/xenium-sandbox-ch/data/slide-5434/Br6522_Post_SFE_filt.RDS")
 # sfe <- readRDS("data/slide-5434/Br6471_Post_SFE_filt.RDS")
-cold# delete this line after the first run
+# delete this line after the first run
 #colData(sfe) <- colData(sfe)[,!grepl("^clust", colnames(colData(sfe)))]
 
 

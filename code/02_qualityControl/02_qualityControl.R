@@ -42,6 +42,7 @@ br6471_p <- readRDS(here("data", data_dir, "Br6471_Post_SFE.RDS"))
 br6522_p <- readRDS(here("data", data_dir, "Br6522_Post_SFE.RDS")) 
 br8667_m <- readRDS(here("data", data_dir, "Br8667_Mid_SFE.RDS"))
 
+print("data read in")
 
 filterCells <- function(sfe){
     cols_use <- names(colData(sfe))[str_detect(
@@ -115,6 +116,7 @@ saveRDS(br6471_p_filt, here("data", data_dir, "Br6471_Post_SFE_filt.RDS"))
 saveRDS(br6522_p_filt, here("data", data_dir, "Br6522_Post_SFE_filt.RDS"))
 saveRDS(br8667_m_filt , here("data", data_dir, "Br8667_Mid_SFE_filt.RDS"))
 
+print("data saved")
 
 ##### Slide 5548 ##### 
 
@@ -125,6 +127,8 @@ br6471_p <- readRDS(here("data", data_dir, "Br6471_Post_SFE.RDS"))
 br2743_m <- readRDS(here("data", data_dir, "Br2743_Mid_SFE.RDS"))
 br8667_m <- readRDS(here("data", data_dir, "Br8667_Mid_SFE.RDS"))
 
+print("data read in")
+
 br6471_p_filt <- filterCells(br6471_p)
 br2743_m_filt <- filterCells(br2743_m)
 br8667_m_filt <- filterCells(br8667_m)
@@ -133,3 +137,4 @@ saveRDS(br6471_p_filt, here("data", data_dir, "Br6471_Post_SFE_filt.RDS"))
 saveRDS(br2743_m_filt, here("data", data_dir, "Br2743_Mid_SFE_filt.RDS"))
 saveRDS(br8667_m_filt, here("data", data_dir, "Br8667_Mid_SFE_filt.RDS"))
 
+print("data saved")

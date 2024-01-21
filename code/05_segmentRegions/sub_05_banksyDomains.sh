@@ -14,7 +14,7 @@
 #Rscript code/cindy/05_segmentRegions/banksyDomains.R processed-data/cindy/slide-${slide}/${sample}_SFE_filt-with-banksy-domains.RDS 0.9 0.5
 
 
-# Caleb version
+# Caleb version - work PLEASE
 module load conda_R/4.3.x
 
 Rscript banksyDomains.R
