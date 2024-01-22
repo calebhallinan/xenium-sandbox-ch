@@ -51,20 +51,27 @@ readXenium <- function(dir_name){
     names(cell_poly)[1] <- "ID"
     names(nuc_poly)[1] <- "ID"
     
+    # change df to sf object for cell/nuc images
     cells_sf <- df2sf(cell_poly, c("vertex_x", "vertex_y"), geometryType = "POLYGON")
     nuc_sf <- df2sf(nuc_poly, c("vertex_x", "vertex_y"), geometryType = "POLYGON")
     
+    # QC check
     all(st_is_valid(cells_sf))
     all(st_is_valid(nuc_sf))
     
+    # get rid if invalid cells/nucs
     ind_invalid <- !st_is_valid(nuc_sf)
     nuc_sf[ind_invalid,] <- nngeo::st_remove_holes(st_buffer(nuc_sf[ind_invalid,], 0))
     
+    # add cell info
     colData(sce) <- cbind(colData(sce), cell_info)
     print(cell_info)
+    
+    # make spatial objects
     spe <- toSpatialExperiment(sce, spatialCoordsNames = c("x_centroid", "y_centroid"))
     sfe <- toSpatialFeatureExperiment(spe)
     
+    # add segmented cells/nuc to spatial object
     cellSeg(sfe, withDimnames = FALSE) <- cells_sf
     nucSeg(sfe, withDimnames = FALSE) <- nuc_sf
     
@@ -85,10 +92,12 @@ readXenium <- function(dir_name){
     n_panel <- nrow(sfe) - sum(is_any_neg)
     #print(n_panel)
     
+    # normalize counts after QC
     colData(sfe)$nCounts_normed <- sfe$nCounts/n_panel
     colData(sfe)$nGenes_normed <- sfe$nGenes/n_panel
     colData(sfe)$prop_nuc <- sfe$nucleus_area / sfe$cell_area
-
+    
+    # add QC columns
     sfe <- addPerCellQCMetrics(sfe, subsets = list(blank = is_blank,
     negProbe = is_neg,
     negCodeword = is_neg2,
@@ -96,7 +105,7 @@ readXenium <- function(dir_name){
     depr = is_depr,
     any_neg = is_any_neg))
 
-
+    # add features
     rowData(sfe)$means <- rowMeans(counts(sfe))
     rowData(sfe)$vars <- rowVars(counts(sfe))
     rowData(sfe)$cv2 <- rowData(sfe)$vars/rowData(sfe)$means^2
@@ -125,7 +134,7 @@ get_neg_ctrl_outliers <- function(col, sfe) {
     sfe
 }
 
-
+# plot mean variance of genes
 plotMeanVar <- function(mean_emp, var_emp, plotTitle){
     model = lm(var_emp ~ 1*mean_emp + I(mean_emp^2) + 0, tibble(mean_emp, var_emp))
     phi = 1/coef(model)["I(mean_emp^2)"]
@@ -152,6 +161,7 @@ plotMeanVar <- function(mean_emp, var_emp, plotTitle){
     return(p)
 }
 
+# grab only sample of interest from spatial object
 getRegionInds <- function(region, data_dir, sfe){
     # Read in the cell ids of a particular region
     region_ids_fname <- paste0(region, "_cell_ids.csv")
@@ -169,20 +179,7 @@ getRegionInds <- function(region, data_dir, sfe){
     
 }
 
-# CH: added function for specific cell_id.csv files Cindy sent for sample -5434
-getRegionInds_5434 <- function(region, data_dir, sfe){
-    # Read in the cell ids of a particular region
-    region_ids_fname <- paste0(region, "_cell_ids.csv")
-    region_ids <- readr::read_csv(here("data", data_dir, region_ids_fname))
-    
-    # Get the sfe indices for the cells in the region
-    region_inds <- which(sfe$cell_id %in% region_ids$x)
-    
-    return(region_inds)
-    
-}
-
-
+# convert objects
 SFEtoSPE <- function(sfe){
     # First convert to an SCE
     sce <- SingleCellExperiment(assays=list(counts=counts(sfe)))
@@ -198,18 +195,7 @@ SFEtoSPE <- function(sfe){
     return(spe)
 }
 
-get_neg_ctrl_outliers <- function(col, spe) {
-    inds <- colData(spe)$nCounts > 0 & colData(spe)[[col]] > 0
-    df <- colData(spe)[inds,]
-    outlier_inds <- isOutlier(df[[col]], type = "higher")
-    outliers <- rownames(df)[outlier_inds]
-    col2 <- str_remove(col, "^subsets_")
-    col2 <- str_remove(col2, "_percent$")
-    new_colname <- paste("is", col2, "outlier", sep = "_")
-    colData(spe)[[new_colname]] <- colnames(spe) %in% outliers
-    return(spe)
-}
-
+# filter cells based on all QC metrics
 filterCells <- function(sfe){
     cols_use <- names(colData(sfe))[str_detect(
         names(colData(sfe)), "_percent$")]
